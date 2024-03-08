@@ -99,8 +99,6 @@ int fill_sack(vector<Item> items, bool randomness, int max_weight)
 int main()
 {
     string file_name = "in1.txt";
-    // cout << "Define input file name: ";
-    // cin >> file_name;
     vector<Item> items = create_item_vector(file_name);
 
     sort(items.begin(), items.end(), order_by_value);

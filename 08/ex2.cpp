@@ -48,20 +48,17 @@ vector<Item> create_item_vector(const string& file_name)
 }
 
 
-Sack fill_sack_1(vector<Item> items, int max_weight)
+Sack fill_sack_2(vector<Item> items, int max_weight)
 {
     random_device rd;
     mt19937 gen(rd());
 
-    int weight = 0;
+    shuffle(items.begin(), items.end(), gen);
+
     Sack sack = Sack(0, {});;
 
     for (auto& item : items) {
-
-        bernoulli_distribution distr;
-        bool random_choice= distr(gen);
-
-        if (random_choice && (sack.total_weight + item.weight) <= max_weight) {
+        if ((sack.total_weight + item.weight) <= max_weight) {
             sack.total_weight += item.weight;
             sack.items.push_back(item);
         }
@@ -76,16 +73,14 @@ int main()
     string file_name = "in1.txt";
     vector<Item> items = create_item_vector(file_name);
 
-    int max_weight;
-    cout << "Define bag max weight: ";
-    cin >> max_weight;
+    int max_weight = 150;
 
     Sack best_sack = Sack(0, {});
 
     int iter = 10;
 
     for (int i = 0; i < iter; i++) {
-        Sack sack_temp = fill_sack_1(items, max_weight);
+        Sack sack_temp = fill_sack_2(items, max_weight);
         if (sack_temp.total_weight > best_sack.total_weight) best_sack = sack_temp;
     }
 

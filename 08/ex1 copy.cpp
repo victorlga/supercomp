@@ -76,7 +76,9 @@ int main()
     string file_name = "in1.txt";
     vector<Item> items = create_item_vector(file_name);
 
-    int max_weight = 10;
+    int max_weight;
+    cout << "Define bag max weight: ";
+    cin >> max_weight;
 
     Sack best_sack = Sack(0, {});
 

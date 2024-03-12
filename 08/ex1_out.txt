@@ -1,3 +1,2 @@
-Output do job 403
-/var/spool/slurmd/job00403/slurm_script: line 11: cd: supercomp/08: No such file or directory
-Error opening file
+Output do job 410
+ID: 1

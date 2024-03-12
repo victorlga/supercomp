@@ -8,5 +8,4 @@
 
 echo Output do job $SLURM_JOB_ID
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
-cd supercomp/08/
 ./ex1

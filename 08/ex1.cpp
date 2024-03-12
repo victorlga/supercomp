@@ -53,7 +53,6 @@ Sack fill_sack_1(vector<Item> items, int max_weight)
     random_device rd;
     mt19937 gen(rd());
 
-    int weight = 0;
     Sack sack = Sack(0, {});;
 
     for (auto& item : items) {

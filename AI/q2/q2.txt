@@ -1,0 +1,15 @@
+Estratégias gulosas não necessariamente garantem uma solução ótima. Algoritmos de heurística gulosa
+resolvem o problema passo a passo, decidindo qual o próximo passo apenas baseando-se em qual a melhor
+solução no contexto atual, ignorando o contexto global. Caso aconteça algo incomum, é possível que
+uma solução subótima seja encontrada pelo algoritmo já que o caso não era considerado nas decisões
+anteriores.
+
+No caso específico do algoritmo da questão 1, por os jobs serem ordenados em ordem decrescente e
+sempre adicionarmos um novo job na máquina mais vazia, é possível saber que uma solução ótima vai
+ser encontrada. Pelo ordenamento, sempre garantimos que os jobs seguintes terão um impacto menor
+no resultado final que o job atual. Pela decisão da máquina a ser adicionada, sempre garantimos
+que as máquinas não vão ficar desbalanceadas. A maior diferença de carga que uma máquina possivelmente
+terá será a diferença entre o job mais pesado para o segundo mais pesado.
+
+Um algoritmo guloso em que não temos a garantia de que a solução ótima será encontrada é adicionar
+o job na máquina mais vazia sem anter ter ordenado decrescente os jobs.

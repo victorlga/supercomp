@@ -1,0 +1,46 @@
+Exploitation consiste em resolver um problema a partir de uma propriedade, explorando-a. Um exemplo aplicado
+ao Problema do Subconjunto de Soma foi dado na questão 1. Na implementação de q1 ordeno em ordem decrescente
+o conjunto e itero pelos elementos do conjunto ordenado. A cada passo da interação, avalio se o elemento cabe
+no subset de forma que o target seja atingido.
+
+Apesar de ser possível encontrar resultados satisfatórias através do exploitation, pode-se ficar preso em um
+ponto ótimo local, não sendo a melhor resposta possível. Isso se torna mais crítico ainda no Problema do Subconjunto
+de Soma pois o resultado é binário, então um ótimo diferente do global (true) seria seu inverso (false)
+
+Por outro lado, exploration, como o nome diz, consiste em explorar o resultado adicionando variabilidade. Por,
+exemplo, seria possível implementar uma solução completamente aleatória, em que os números são bagunçados ao
+invés de ordenados. Poderíamos iterar pelo conjunto e adicionar os números ao subset até que o target seja
+alcançado, os números acabem ou o valor do target seja estrapolado. Essa estratégia seria uma completa explo-
+ração, sem nenhuma "exploitação".
+
+Para combinar ambar estratégias, poderia implementar a heurística descrita no primeiro parágrafo e adicionar
+variabilidade na tomada de decisão. Por exemplo, adicionar uma probabilidade de 75% de seguir a heurística,
+sendo os outros 25% a probabilidade de adicionar ao subconjunto um número completamente aleatório do conjunto.
+
+O benefício do exploitation é a previsibilidade e, em alguns casos específicos, vai ser possível encontrar a
+melhor solução global sem fazer uma busca exaustiva. Já o exploration nos permite escapar das melhores soluções
+locais, possibilitanto a busca da melhor global quando ela não é encontrada na primeira tentativa.
+
+Exemplo de pseudocodigo
+
+Funcao:
+    Define conjunto C.
+    Ordena conjunto C decrescentemente.
+    Define target T do subconjunto.
+
+    Para cada elemento E de C:
+        Define valor aleatório VAL de 0 a 1.
+        Se VAL <= 0.25:
+            Define número aleatório RAND dentre os não avaliados de C.
+            Se T-RAND >= 0:
+                Subtrai RAND de T.
+            Coloca E na posição de RAND em C.
+        Se não:
+            Se T-E >= 0:
+                Subtrai E de T.
+        
+        Se T < 0:
+            Retorna FALSE.
+
+    Retorna T == 0.
+

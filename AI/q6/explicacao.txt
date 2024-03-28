@@ -1,0 +1,49 @@
+O algoritmo de dijkstra busca encontrar o a geodésica entre dois nós em uma rede de
+grafos considerando o peso das arestas.
+
+Ele inicia criando uma lista em que cada elemento será a menor distancia encontrada do
+nó inicial. Por exemplo, se iniciamos no nó A, a distancia para o nó A seria 0 e a 
+distancia para um nó vizinho de A seria o peso da aresta entre o nó A e seu vizinho.
+As distancias para os vizinhos são adicionadas ao vetor de distancia, no indice equi-
+valente à posição do vizinho no vetor.
+
+Logo depois, cria-se um vetor com todos os nós que já foram visitados. Uma vez que
+iniciamos em A, ele é adicionado na lista de visitados e podemos visitar o nó com
+a menor distancia para A. Nesse nó, vamos investigar seus vizinhos com excessão daqueles
+presentes na lista de nós já visitados.
+
+Para os nós que ainda não haviam a menor distancia em relação a A registrada, ele será
+dada como a distancia de A para o nó atual + a distancia do nó atual para o vizinho.
+Para os nós que a distancia já havia sido registrada no vetor, ela será comparada com
+a distancia de A para o nó atual + a distancia do nó atual para o vizinho e, caso esta
+seja menor, substituirá o valor da distancia no vetor de distancias para A.
+
+Então trocamos o nó atual, usando como critério aquele que possui a menor distancia para
+o nó inicial A entre os já analisados. O anterior é adicionado à lista de nós já visitados.
+
+Isso será feito sucessivamente até que todos os nós estejam na lista de nós visitados com
+as menores distancias até A calculadas ou até que encontre o nó destino. Assim podemos definir
+com segurança qual a menor distância entre o destino e um nó inicial A.
+
+No quesito complexidade, o algoritmo usando fila de prioridade é O((V + A) log V), onde V é
+o número de vértices e A é o número de arestas. De primeira vista já é possível saber que o 
+algoritmo é mais sensível a quantidade de vértices do que arestas. Além disso, para que um
+vértice faça parte de uma rede, ele deve possuir pelo menos 1 aresta com outro vértice.
+Portanto, o número mínimo de arestas será V-1.
+
+Por simplicidade, para entender o limite até a computação do algoritmo fique inviável, vou
+fazer o calculo otimista de que temos apenas 1 aresta por vértice. A complexidade ficaria
+O((V + V-1) log V), que pode ser simplificado em O((2*V) log V) e, por fim, O(V log V).
+Nesse necenário ótimista, teríamos a seguinte tabela:
+
+Nós         | Operações
+------------|-----------
+1.000       | 3000
+10.000      | 40000
+100.000     | 500000 -> Aqui já começa a ficar crítico
+1.000.000   | 6000000
+
+Considerando que estamos em um cenário extremamente otimista (apenas 1 aresta por vértice),
+A existencia de 100.000 nós já começa a ficar crítico devido a quantidade de operações. Por
+segurança, recomendo parar em uma ordem de grandeza antes (10.000 nós), pois quase nunca uma
+rede de nós vai ter apenas 1 vértice entre cada nó.

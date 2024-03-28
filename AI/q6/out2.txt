@@ -1,0 +1,24 @@
+No pseudocodigo foi pedido para inverter o resultado final.
+
+Eu acredito que a implementação usada para construir o gabarito não inverte o resultado final, porque o resultado
+está o exato inverso do resultado esperado.
+
+Para manter a coerencia com o pseudocodigo, vou manter a inversão. Afinal, o caminho é o mesmo, só está da origem
+para o destino ao invés do destino para a origem.
+
+victor@linux:~/insper/supercomp/supercomp/AI/q6$ ./q6 < in2.txt
+----- Resultado encontrado
+Caminho mais curto de 7 para 2: 2 4 3 6 7 
+Caminho mais curto de 0 para 5: 5 3 1 0 
+Caminho mais curto de 1 para 2: 2 4 3 1 
+Caminho mais curto de 2 para 6: 6 3 4 2 
+Caminho mais curto de 2 para 1: 1 3 4 2 
+Caminho mais curto de 5 para 1: 1 3 5
+
+----- Resultado do professor
+Caminho mais curto de 7 para 2: 7 6 3 4 2
+Caminho mais curto de 0 para 5: 0 1 3 5
+Caminho mais curto de 1 para 2: 1 3 4 2
+Caminho mais curto de 2 para 6: 2 4 3 6
+Caminho mais curto de 2 para 1: 2 4 3 1
+Caminho mais curto de 5 para 1: 5 3 1

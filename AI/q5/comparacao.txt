@@ -1,0 +1,4 @@
+O cálculo do Fibonacci pode ser otimizado significativamente com a técnica de memoização. Sem memoização, o tempo para
+calcular o Fibonacci de 20 foi 0.0002 segundos, já o Fibonacci de 40 foi 0.59 segundos. Com memoização, o tempo para cal-
+cular tanto o Fibonacci de 20 quanto o de 40 foi aproximadamente 0.000004. Esse ganho de tempo acontece pois, com memoização,
+o calculo de fibonacci tem complexidade O(N), enquanto sem memoização a complexidade é O(2^N).

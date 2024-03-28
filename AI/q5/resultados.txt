@@ -1,0 +1,20 @@
+Sem memoização:
+
+Defina o valor de N: 20
+Fibonacci de 20 é 6765
+Tempo para calcular: 0.0002
+
+Defina o valor de N: 40
+Fibonacci de 40 é 102334155
+Tempo para calcular: 0.59
+
+----------------------------------------------------
+Com memoização:
+
+Defina o valor de N: 20
+Fibonacci de 20 é 6765
+Tempo para calcular: 4e-06
+
+Defina o valor de N: 40
+Fibonacci de 40 é 102334155
+Tempo para calcular: 4e-06

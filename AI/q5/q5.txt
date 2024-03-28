@@ -1,5 +1,0 @@
-g++ -o executable file.cpp
-
-valgrind --tool=callgrind ./executable
-
-callgrind_annotate callgrind.out.PID file.cpp

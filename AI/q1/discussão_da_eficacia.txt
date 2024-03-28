@@ -1,0 +1,19 @@
+Heurística adotada: Adicionar ao subconjunto o maior número do conjunto que ao somar não ultrapasse o target.
+Essa heurística é capaz de encontrar um resultado ótimo rapidamente em alguns casos em que o conjunto possui
+elementos que possibilitam somar o valor do target.
+
+Na implementação, eu percorro todos os elementos do conjunto e subtraio do valor do target o valor do elemento.
+Caso o resultado da subtração seja maior ou igual a 0, eu adiciono o elemento no subconjunto. Se for igual, sig-
+nifica que encontramos o subconjunto em que a soma é igual ao target. Se for maior, encontramos um elemento para
+o subconjunto, mas ainda é necessário percorrer os outros elementos do conjunto para alcançar os targets.
+
+Um caso em que a heurística não funcionaria seria para o target 10 e o conjunto {9, 8, 2}. O número 9 é inferior
+ao 10, portanto seria adicionado ao subconjunto. Para que o target fosse alcançado, seria necessário adicionar o
+número 1 ao conjunto, porém ele não está disponível.
+
+Os outros elementos do conjunto somados alcançariam o target (8 + 2 = 10). Porém, por a soma deles ao elemento 9
+ultrapassar o target, nenhum deles seria incluso no subconjunto. Para generalizar, o algoritmo que eu implementei
+é um algoritmo guloso, que ignora o contexto global e toma a decisão que parece ótima no contexto local.
+
+A consequência dessa estratégia é que imprevistos podem acontecer, como os passos futuros resolverem o problema
+mais eficazmente que o passo atual, mesmo que o passo atual aparente ser o melhor no instante.

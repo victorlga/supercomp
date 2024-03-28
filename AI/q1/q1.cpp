@@ -6,21 +6,7 @@
 
 using namespace std;
 
-struct Job {
-    int load;
-
-    Job(int load) : load(load) {}
-};
-
-struct Machine {
-    int load;
-    int id;
-    vector<Job> jobs;
-
-    Machine(int load, int id, vector<Job> jobs) : load(load), id(id), jobs(jobs) {}
-};
-
-void fill_vectors(vector<Machine>& machines, vector<Job>& jobs)
+void read_set_and_target(vector<int>& set, int& target)
 {
     ifstream file("input.txt");
     if (!file.is_open()) {
@@ -29,88 +15,48 @@ void fill_vectors(vector<Machine>& machines, vector<Job>& jobs)
     
     string line;
     getline(file, line);
-    stringstream jobstream(line);
+    stringstream intstream(line);
 
-    int number_jobs;
-    int number_machines;
-    jobstream >> number_jobs >> number_machines;
+    intstream >> target;
 
-    for (int i = 0; i < number_machines; ++i) {
-        machines.push_back(Machine(0, i, {}));
-    }
-
-    int execution_time;
-
+    int number;
     while (getline(file, line)) {
-        stringstream jobstream(line);
-        jobstream >> execution_time;
-        Job job = Job(execution_time);
-        jobs.push_back(job);
+        stringstream intstream(line);
+        intstream >> number;
+        set.push_back(number);
     }
 
     file.close();
 }
 
-bool ordering_criteria(const Job &a, const Job &b) { return a.load >= b.load; }
+bool orderingCriteria(const int &a, const int &b) { return a > b; }
 
-Machine& find_lighter_machine(vector<Machine>& machines)
+bool subsetSum(const vector<int>& set, int target)
 {
-    Machine* lighter_machine = &machines[0];
-    for (Machine& machine : machines) {
-        if (machine.load < lighter_machine->load) {
-            lighter_machine = &machine;
+    for (int number : set) {
+        if (target - number >= 0) {
+            target -= number;
+            cout << "Number added into subset: " << number << endl;
         }
     }
-    return *lighter_machine;
-}
-
-void add_jobs_to_machines(vector<Machine>& machines, vector<Job>& jobs)
-{
-    for (Job& job : jobs) {
-        Machine& lighter_machine = find_lighter_machine(machines);
-        lighter_machine.jobs.push_back(job);
-        lighter_machine.load += job.load;
-    }
-}
-
-
-int calculate_max_machine_load(vector<Machine>& machines)
-{
-    Machine& heavier_machine = machines[0]; 
-    for (Machine& machine : machines) {
-        if (machine.load > heavier_machine.load) {
-            heavier_machine = machine;
-        }
-    }
-
-    return heavier_machine.load;
-}
-
-void write_output_file(vector<Machine>& machines, int& max_machine_load)
-{
-    ofstream file("output.txt");
-    if (!file.is_open()) {
-        cerr << "Error while opening the file." << endl;
-    }
-
-    for (Machine& machine : machines) {
-        file << "Machine " << machine.id << " load: " << machine.load << endl;
-    }
-
-    file << "Max machine load: " << max_machine_load << endl;
-    file.close();
+    return target == 0;
 }
 
 int main()
 {
-    vector<Machine> machines = {};
-    vector<Job> jobs;
+    vector<int> set = {};
+    int target;
 
-    fill_vectors(machines, jobs);
-    sort(jobs.begin(), jobs.end(), ordering_criteria);
-    add_jobs_to_machines(machines, jobs);
-    int max_machine_load = calculate_max_machine_load(machines);
-    write_output_file(machines, max_machine_load);
+    // Read number set from input.txt where first line is target and
+    // following ones are integer numbers.
+    read_set_and_target(set, target);
+
+    sort(set.begin(), set.end(), orderingCriteria);
+    bool targetFound = subsetSum(set, target);
+
+    if (targetFound) {
+        cout << "Target found!" << endl;
+    }
 
     return 0;
 }

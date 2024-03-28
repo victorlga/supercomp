@@ -1,0 +1,37 @@
+Ao analisar o resultado do callgrind, identifiquei que o trecho de código mais custoso é
+a função multiplicarMatrizes, com 1,250,442 instruções no processador. Isso faz sentido,
+dado que a estratégia de multiplicação adotada é O(n^3) para matrizes quadradas, como no caso
+do código em q4.cpp.
+
+Uma estratégia para melhorar a performance do código seria trocar o algoritmo utilizado para
+multiplicação de matrizes. Um exemplo famoso é o algoritmo de Strassen, que possui complexidade
+de aproximadamente O(n^2.8). O algoritmo com melhor performance elaborado até hoje possui complexidade
+de O(n^2.3) -pelo menos era o melhor até a data do trabalho que eu fiz na matéria Desafios de
+Programação no quinto-semestre, justamente sobre multiplicação de matrizes.
+
+Quando implementei o strassen, o que aconteceu foi o contrário. A quantidade de instruções aumentou
+em 10 vezes, assim como o tempo de execução. Provavelmente cometi algum erro na implementação.
+
+Preocupado com o tempo da prova, ao invés de tentar corrigir minha implementação, busquei uma alter-
+nativa. Uma operação muito frequente na multiplicação de matrizes é o acesso à memória, sendo ela
+custosa em relação à quantidade de operações a depender do processador.
+
+O que eu fiz foi reduzir os acessos em memória nas matrizes A e B (ao invés de acessar todas as vezes
+para encontrar o vetor e depois o elemento, defino a posição assim que possível e busco apenas o elemento).
+Fiz algo semelhante na matriz C. Ao invés de somar a cada iteração buscando o vetor para depois buscar o
+elemento e ai sim fazer a soma, eu faço a soma e depois adiciono o resultado final da posição devida.
+
+Para não precisar alocar um vetor novo a cada vez que eu fixava um vetor de A ou B para facilitar a
+busca, usei ponteiros.
+
+Como as matrizes eram quadradas, para viabilizar a mudança acima eu troquei a leitura de b: b[k][j]
+para b[j][k]. Caso não estivéssemos trabalhando com matrizes quadradas uma das mudanças (vetores de A e B 
+fixados ou elemento de C fixado) não seria possível.
+
+Essa melhoria reduziu o custo da função em mais da metade, sendo agora apenas 568,435.
+
+Uma pequena melhoria que também fiz foi passar as dimensões das matrizes para a função ao invés de
+calcula-las no escopo. Se eu já havia esse dado, não faz sentido calcular novamente.
+
+O resultado final foi uma melhoria de 5,867,646 operações para 3,684,817 operações. Uma melhora
+de quase 40% na performance sem que fosse necessário alterar o algoritmo.

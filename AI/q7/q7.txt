@@ -1,0 +1,30 @@
+1. Qual é a importância de aliar estratégias de implementação (Software) com recursos computacionais disponíveis (Hardware)
+   para melhor endereçamento do problema?
+
+Tratando o software e o hardware isoladamente já é possível entender a importânciade aliar estratégias em ambos para
+endereçar um problema de supercomputação. O hardware vai determinar qual o tempo que vai demorar uma única instrução
+de máquina. Não importa o quanto nosso código é otimizado, se o tempo de clock do processador for 1 segundo e nosso
+código possuir 1000 instruções, o programa irá demorar 1000 segundos - sem levar em consideração tempos como acesso
+a memória, que vai gerar dependência no processador.
+
+Por outro lado, o software vai determinar, por exemplo, a complexidade da nossa solução. Se nosso problema trabalha com
+um vetor de tamanho 100 e usamos uma solução com complexidade O(1), poderíamos aumentar o vetor infinitamente que não
+haveria impacto no tempo de execução. Mas caso a complexidade fosse O(N^2), o tempo de execução seria exponencial ao ta-
+manho do vetor - no caso, 10000 unidades de tempo. Então a cada elemento que adicionássemos ao vetor, o impacto na execu-
+ção teria aumento exponencial. A performance seria ruim independente do hardware.
+
+Quando unimos hardware e software, além dos benefícios já apresentados, também temos, por exemplo, a possibilidade de
+paralelizar nosso programa. Para que isso seja possível é necessário haver mais de 1 core disponível (hardware) e, também,
+que o código seja programado de forma que esses cores sejam aproveitados (software), como implementando threads ou
+utilizando tecnologias como a CUDA.
+
+2. Considerando a administração de um cluster, existem diversas estratégias que permitem e alocação mais adequada dos jobs
+   nas máquinas de computação. Discorra sobre tais estratégias analisando-as criticamente em termos de efetividade e viabilização.
+
+Na matéria de supercomputação estudamos duas estratégias diferentes: FIFO scheduling e Backfill scheduling. Na estratégia FIFO
+(first in, first out) os jobs são executados em ordem de chegada, independente de quanto hardware eles demandam.
+
+Já na backfill, os jobs são executados em ordem de chegada porém, caso algum job possa rodar em paralelo aos jobs anteriores
+sem impactar os jobs anteriores (sem utilizar recurso computacional que seria destinado aos anteriores), assim será feito.
+A estratégia backfill funciona como um tetris. Um job só é adicionado ao fim da fila quando realmente não cabe em nenhum hardware
+disponível antes.

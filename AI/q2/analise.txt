@@ -1,0 +1,51 @@
+O comportamento está de acordo com o esperado.
+
+Inicialmente eu havia feito arquivos de inputs sendo input_X.txt contendo 10^(x+1) elementos no conjunto.
+
+Rapidamente vi o quão seria problemático para rodar essa abordagem. A simples criação dos arquivos já estava
+demorando muito.
+
+O algoritmo exaustivo realiza todas as combinações possíveis entre os elementos do conjunto. A quantidade de
+combinações possíveis é N!, sendo N a quantidade de elementos. Portanto, em um cenário ideal, o esperado era
+que sempre que aumentássemos o tamanho do conjunto em X, o tempo de execução deveria aumentar em aproximadamente
+(N+X)! / N!.
+
+Apesar do resultado não ter sido tão exato quanto a fórmula indica, é necessário lembrar que a quantidade de
+instruções no processador não é linear com a quantidade de combinações feitas. O que é razoável esperar é que
+o tempo de execução irá escalar muito mais que a quantidade de elementos adicionados ao conjunto.
+
+Abaixo temos um exemplo de resultado com tamanho_conjunto = [3, 10, 20]. Não testei com tamanhos maiores pois 
+o programa começava a demorar muito para executar. Ao comparar o tempo para o input_1 e o input_2 rodarem, vemos
+um fator de diferença de aproximadamente 236. Ao comparar o tempo para o input_0 e o input_1 rodarem, observamos
+um fator de diferença de aproximadamente 12.
+
+Ou seja, já é possível perceber que a cada novo elemento no conjunto o aumento no tempo de execução é muito maior
+que linear e, inclusive, maior que quadrático, como demonstrado pela fórmula da quantidade de combinações.
+
+Starting search for file input_0.txt
+Time to search subsets in input_0.txt: 9.3e-05
+Starting search for file input_1.txt
+Target found in input_1.txt
+Time to search subsets in input_1.txt: 0.0011
+Starting search for file input_2.txt
+Target found in input_2.txt
+Time to search subsets in input_2.txt: 0.26
+Starting search for file input_3.txt
+Time to search subsets in input_3.txt: 4.3e-05
+Starting search for file input_4.txt
+Target found in input_4.txt
+Time to search subsets in input_4.txt: 0.0003
+Starting search for file input_5.txt
+Target found in input_5.txt
+Time to search subsets in input_5.txt: 0.26
+Starting search for file input_6.txt
+Time to search subsets in input_6.txt: 3.4e-05
+Starting search for file input_7.txt
+Target found in input_7.txt
+Time to search subsets in input_7.txt: 0.0003
+Starting search for file input_8.txt
+Target found in input_8.txt
+Time to search subsets in input_8.txt: 0.26
+Starting search for file input_9.txt
+Time to search subsets in input_9.txt: 2.8e-05
+

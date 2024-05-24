@@ -1,0 +1,36 @@
+Eu realizei a implementação com 1, 2, 4 e 8 cores e com matrizes de lado 100, 500 e 1000, totalizando 12 resultados.
+
+A principal estratégia de parelização utilizada foi através do uso da diretiva #pragma omp parallel for collapse(2), que separa 2 fors aninhados em diferentes seções,
+de acordo com o número de threads disponíveis.
+
+Na implementação com matrizes de lado 100, observei os seguintes tempos de execução:
+    1. 0.0133851
+    2. 0.00315631
+    4. 0.00163516
+    8. 0.00129683
+A cada vez que dobramos a quantidade de nós, observamos uma diminuição menor que a anterior no tempo de execução.
+De 1 para 2, ganho de 4x. De 2 para 4, ganho de 2x. De 4 para 8, um ganho menor que 1x. Portanto, pode-se concluir que o *ganho* de performance por core adicionado
+diminui na medida que vamos adicionando cores. É plausível assumir que esse ganho irá estabilizar em algum momento, podendo até começar a prejudicar a performance
+devido ao custo atrelado à paralelização.
+
+Na implementação com matrizes de lado 500, observei os seguintes tempos de execução:
+    1. 0.783782
+    2. 0.368847
+    4. 0.24296
+    8. 0.200143
+O comportamento foi semelhante ao anterior na medida que observamos uma diminuição menor que a anterior no tempo de execução.
+Porém, o ganho de execução de uma quantidade de cores para outra foi proporcionalmente menor que no caso anterior, com matrizes de lado 100.
+
+Na implementação com matrizes de lado 1000, observei os seguintes tempos de execução:
+    1. 6.33763
+    2. 6.14834
+    4. 2.86589
+    8. 1.20073
+Por fim, com matrizes de lado 1000 observamos uma anomalia dos casos com 1 para 2 cores em que praticamente não houve ganho de performance.
+Provavelmente isso ocorreu devido a otimizações ao compilador. Já nos casos de 2 para 4 e 4 para 8 cores o comportamento foi muito semelhante
+aos dois casos anteriores.
+
+É possível concluir que na medida que a quantidade de cores aumenta o tempo de execução reduz, porém o *ganho* de performance também reduz, até
+que em algum ponto não faz mais sentido devido ao custo de paralelização e de recursos computacionais adicionar mais cores para paralelizar as operações.
+Também é possível concluir que o tempo de execução cresce muito na medida que aumentamos o tamanho da matriz. Quando comparamos a execução com 1 core
+com lado 100 e lado 1000, vemos um aumento no tempo de execução de 2⁹.

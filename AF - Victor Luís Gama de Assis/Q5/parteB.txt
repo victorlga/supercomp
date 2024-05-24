@@ -1,0 +1,10 @@
+Escalonamento dinâmico é uma das estratégias possíveis para alocação de tasks em threads no OpenMP. Em um cenário em que possuo 4 threads, estando as 4 ocupadas, o
+escalonamento dinâmico irá alocar as tasks em chunks na medida que as threads tiverem espaço disponível para a quantidade mínima de threads do chunk, que no OpenMP
+o default é 1. Por um lado, existe um custo de scheduling overhead, em que o processador precisa monitorar e decidir em qual threads o próximo chunk será alocado.
+Por outro, em um cenário em que o custo de execução das tasks não é uniforme e apresentam variabilidade de carga, é possível otimizar a execução distribuindo as tasks
+mais leves entre várias threads enquanto outras poucas estão ocupadas em processar a tasks pesadas.
+
+Exemplo: task pool possui 5 tasks, sendo 1 pesada, tomando 4 horas para rodar, e 4 leves, tomando 1 hora cada para rodar. Possuo 2 threads. Com um escalonamento estático,
+Cada task seria direciona uniformemente para as threads, levando um tempo total de 6 horas para executar todas as tasks. Já com um escalonamento dinâmico, existe uma grande
+chance (não é possível garantir devido a ordem de alocação das tasks imprevisível) da execução durar apenas 4 horas, pois enquanto uma thread processava a task pesada, a
+outra processava todas as tasks leves.

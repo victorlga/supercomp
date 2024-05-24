@@ -1,0 +1,15 @@
+Memória compartilhada: um sistema computacional de memória compartilhada é um sistema multicore que segue a arquitetura Uniform Memory Access. Isso significa que
+as unidades de processamento irão ter acesso à uma única memória. Portanto, uma alteração feita no dado X pela unidade de processamento 0 afetará o resultado de
+um instrução rodando na unidade de processamento 1 que também utilizar o dado X. Isso pode gerar conflitos, como duas unidades de processamento acessarem e alterarem
+o dado X simultaneamente, porém possui o benefício de não ser necessário realizar a comunicação via rede, que custa bastante tempo, entre diferentes unidades de
+processamento. 
+
+Memória distribuída: um sistema computacional de memória distribuída é um sistema com várias máquinas que segue a arquitetura Non-uniform Memory Access. Isso significa
+que as unidades de processamento irão ter acesso a mais de uma memória e estarão segregadas em diferentes máquinas. Portanto, duas unidades de processamento, caso estejam
+segregadas em diferentes máquinas, não irão ter acesso direto a aos mesmos dados, então não há o risco de conflito. Por outro lado, para acessar um dado utilizado por
+outra unidade de processamento, uma máquina precisa receber esse dado via rede, o que pode ser custoso.
+
+OpenMP: memória compartilhada
+MPI: memória distribuída
+Thrust: memória compartilhada, na medida que os CPUs usam uma única memória e as GPUs usam uma única outra memória, mas distribuída, na medida que as GPUs usam
+uma memória diferente da usada pelas CPUs, portanto é necessário que haja uma transferência de dados durante a execução.

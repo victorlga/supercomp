@@ -1,0 +1,3 @@
+Resultado usando 8 cores
+Matrix size is 500 x 500
+Time taken for matrix multiplication: 0.200143 seconds.

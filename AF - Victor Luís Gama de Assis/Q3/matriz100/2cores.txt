@@ -1,0 +1,3 @@
+Resultado usando 2 cores
+Matrix size is 100 x 100
+Time taken for matrix multiplication: 0.00315631 seconds.
